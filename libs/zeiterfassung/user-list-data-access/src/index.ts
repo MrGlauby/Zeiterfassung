@@ -1,1 +1,1 @@
-export * from './lib/user-list-data-access/user-list-data-access.component';
+export {ZeiterfassungUserListService} from './lib/user-list.service';
