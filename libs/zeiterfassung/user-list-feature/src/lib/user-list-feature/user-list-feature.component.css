@@ -1,0 +1,12 @@
+.table-wrapper{
+    padding: 20px;
+    background-color: rgba(88, 88, 88, 0.341);
+}
+
+.table-box-details{
+    border: solid red;
+}
+
+.table-details{
+    color: white;
+}

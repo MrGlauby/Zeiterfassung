@@ -1,14 +1,42 @@
 <p>user-list-feature works!</p>
 
+<button (click)="createUser()">Create me!</button>
 
-<!-- // tabelle oder Liste  -->
+<div class="table-wrapper">
+  <table
+    mat-table
+    [dataSource]="users"
+    class="mat-elevation-z8"
+    style="color: white"
+  >
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+    </ng-container>
 
-<!--  Daten + create Uaser  -->
+    <!-- Group Column -->
+    <ng-container matColumnDef="group">
+      <th class="table-details" mat-header-cell *matHeaderCellDef>Group</th>
+      <td mat-cell *matCellDef="let user">{{ user.group }}</td>
+    </ng-container>
 
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastname">
+      <th class="table-details" mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let user">{{ user.lastname }}</td>
+    </ng-container>
 
-
-<button (click)="createUser()">KLock me</button>
-
-
-
-<pre>{{ userListService.getAll() | json}}</pre>
+    <tr
+      class="table-details"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr
+      class="table-details"
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>
+<!-- <pre>{{ userListService.getAll() | json }}</pre> -->
