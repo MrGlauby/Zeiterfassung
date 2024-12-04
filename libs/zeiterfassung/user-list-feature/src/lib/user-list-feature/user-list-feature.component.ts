@@ -1,30 +1,38 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ZeiterfassungUserListService } from '@zeiterfassung/user-list-data-access';
-import { User } from 'libs/zeiterfassung/user-list-data-access/src/lib/user.interface';
-import { MatTableModule } from '@angular/material/table'; // Importiere das MatTableModule
-import { CdkTableModule } from '@angular/cdk/table';
+import { Dialog } from '@angular/cdk/dialog';
+import { withDebugTracing } from '@angular/router';
 
 @Component({
   selector: 'lib-user-list-feature',
   standalone: true,
   templateUrl: './user-list-feature.component.html',
   styleUrl: './user-list-feature.component.css',
-  imports: [CommonModule, MatTableModule, CdkTableModule],
+  imports: [CommonModule],
 })
 export class UserListFeatureComponent {
+
   userListService = inject(ZeiterfassungUserListService);
+  changeDetectorRef = inject(ChangeDetectorRef);
+  dialog = inject(Dialog);
 
-  public users: User[] = [];
-  public displayedColumns: string[] = ['name', 'group', 'lastname']; // Spaltennamen
+  public displayedColumns: string[] = ['name', 'group', 'lastname'];
 
+  // hier kommt der cdkDilaog rein!
   public createUser(): void {
     this.userListService.create({
       name: 'Max',
       lastname: 'Mustermann',
       group: 'employee',
     });
-    this.users = this.userListService.getAll();
-    console.log('User hinzugefügt:', this.users);
+    this.changeDetectorRef.detectChanges();
+    console.log('User hinzugefügt:');
   }
+
+
+
+
+
+
 }

@@ -1,42 +1,30 @@
 <p>user-list-feature works!</p>
 
-<button (click)="createUser()">Create me!</button>
+<div class="wrapper">
+  <div class="table-container">
+    <button class="btf-details" (click)="createUser()">Create me!</button>
 
-<div class="table-wrapper">
-  <table
-    mat-table
-    [dataSource]="users"
-    class="mat-elevation-z8"
-    style="color: white"
-  >
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
-    </ng-container>
+    <div class="table-header-box">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Group</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of userListService.getAll()">
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.lastname }}</td>
+              <td>{{ user.group }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
 
-    <!-- Group Column -->
-    <ng-container matColumnDef="group">
-      <th class="table-details" mat-header-cell *matHeaderCellDef>Group</th>
-      <td mat-cell *matCellDef="let user">{{ user.group }}</td>
-    </ng-container>
-
-    <!-- Last Name Column -->
-    <ng-container matColumnDef="lastname">
-      <th class="table-details" mat-header-cell *matHeaderCellDef>Last Name</th>
-      <td mat-cell *matCellDef="let user">{{ user.lastname }}</td>
-    </ng-container>
-
-    <tr
-      class="table-details"
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-    ></tr>
-    <tr
-      class="table-details"
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-    ></tr>
-  </table>
+    <!-- <pre>{{ userListService.getAll() | json }}</pre> -->
+  </div>
 </div>
-<!-- <pre>{{ userListService.getAll() | json }}</pre> -->

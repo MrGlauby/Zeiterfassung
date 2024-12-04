@@ -7,9 +7,15 @@ export class ZeiterfassungUserListService {
   #data: User[] = [];
   #counter = 0;
 
-  // property name: type
-  public create(user: UserCreate): void {
-    this.#data.push({ ...user, id: this.#counter++ });
+  // public create(user: UserCreate): void {
+  //   this.#data.push({ ...user, id: this.#counter++ });
+  // }
+
+  // evtl. user ausgeben lassen und in newUser speichern?
+  public create(user: UserCreate): User {
+    const newUser = { ...user, id: this.#counter++ };
+    this.#data.push(newUser);
+    return newUser;  
   }
 
   public getAll(): User[] {

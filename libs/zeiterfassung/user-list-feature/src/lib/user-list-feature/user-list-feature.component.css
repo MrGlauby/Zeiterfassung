@@ -1,12 +1,24 @@
-.table-wrapper{
-    padding: 20px;
-    background-color: rgba(88, 88, 88, 0.341);
-}
-
-.table-box-details{
-    border: solid red;
-}
-
-.table-details{
-    color: white;
-}
+/* Allgemeine Tabellenstile */
+.user-table {
+    width: 100%;
+    border-collapse: collapse; /* Entfernt doppelte Ränder */
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 10px 20px; /* Fügt Abstand hinzu */
+    border: 1px solid #ddd; /* Fügt eine leichte Umrandung hinzu */
+  }
+  
+  .user-table th {
+    background-color: #d8d8d888; /* Macht den Header besser sichtbar */
+    font-weight: bold;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #6b6b6b; /* Alternierende Zeilenfarbe */
+  }
+  
