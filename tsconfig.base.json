@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@zeiterfassung/ui": ["libs/shared/ui/src/index.ts"],
+      "@zeiterfassung/user-create-modal": [
+        "libs/zeiterfassung/user-create-modal/src/index.ts"
+      ],
       "@zeiterfassung/user-list-data-access": [
         "libs/zeiterfassung/user-list-data-access/src/index.ts"
       ],

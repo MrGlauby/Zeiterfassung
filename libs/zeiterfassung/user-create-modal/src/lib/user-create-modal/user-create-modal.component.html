@@ -1,0 +1,24 @@
+<p>user-create-modal works!</p>
+
+<div class="form-wrapper">
+  <form class="form-box" action="" [formGroup]="form">
+    <label
+      >Name
+      <input type="text" [formControlName]="'name'" />
+    </label>
+    <label
+      >Lastname
+      <input type="text" [formControlName]="'lastname'" />
+    </label>
+    <label
+      >Group
+      <select [formControlName]="'group'">
+        <option [value]="'employee'">Angestellter</option>
+        <option [value]="'freelancer'">Freelancer</option>
+      </select>
+      <br />
+      <hr />
+      <button (click)="submit()">Submit</button>
+    </label>
+  </form>
+</div>

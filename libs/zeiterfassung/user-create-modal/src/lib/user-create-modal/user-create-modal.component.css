@@ -1,0 +1,30 @@
+.form-wrapper {
+  padding: 50px;
+  width: 500px;
+  min-width: 100px;
+  background-color: #2b2e3d;
+}
+
+label {
+  display: block;
+  padding: 30px;
+}
+
+input,
+select {
+  display: block;
+  padding: 10px;
+  width: 300px;
+  min-width: 100px;
+  margin-top: 20px;
+}
+
+select {
+  width: 320px;
+}
+
+button {
+  margin-top: 20px;
+
+  padding: 10px;
+}

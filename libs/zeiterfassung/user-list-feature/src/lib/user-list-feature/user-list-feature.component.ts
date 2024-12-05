@@ -1,8 +1,11 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ZeiterfassungUserListService } from '@zeiterfassung/user-list-data-access';
+import {
+  UserGroup,
+  ZeiterfassungUserListService,
+} from '@zeiterfassung/user-list-data-access';
 import { Dialog } from '@angular/cdk/dialog';
-import { withDebugTracing } from '@angular/router';
+import { ZeiterfassungUserCreateModalComponent } from '@zeiterfassung/user-create-modal';
 
 @Component({
   selector: 'lib-user-list-feature',
@@ -12,7 +15,6 @@ import { withDebugTracing } from '@angular/router';
   imports: [CommonModule],
 })
 export class UserListFeatureComponent {
-
   userListService = inject(ZeiterfassungUserListService);
   changeDetectorRef = inject(ChangeDetectorRef);
   dialog = inject(Dialog);
@@ -21,18 +23,25 @@ export class UserListFeatureComponent {
 
   // hier kommt der cdkDilaog rein!
   public createUser(): void {
-    this.userListService.create({
-      name: 'Max',
-      lastname: 'Mustermann',
-      group: 'employee',
+    const dialogRef = this.dialog.open<{
+      name: string;
+      lastname: string;
+      group: UserGroup;
+    }>(ZeiterfassungUserCreateModalComponent, {
+      data: { message: 'Neuer Benutzer erstellen?' },
     });
-    this.changeDetectorRef.detectChanges();
-    console.log('User hinzugefügt:');
+
+    dialogRef.closed.subscribe((result) => {
+      console.log(result);
+      if (result) {
+        this.userListService.create({
+          name: result.name,
+          lastname: result.lastname,
+          group: result.group,
+        });
+        this.changeDetectorRef.detectChanges();
+        console.log('User hinzugefügt:', result);
+      }
+    });
   }
-
-
-
-
-
-
 }
