@@ -6,13 +6,14 @@ import {
 } from '@zeiterfassung/user-list-data-access';
 import { Dialog } from '@angular/cdk/dialog';
 import { ZeiterfassungUserCreateModalComponent } from '@zeiterfassung/user-create-modal';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-user-list-feature',
   standalone: true,
   templateUrl: './user-list-feature.component.html',
   styleUrl: './user-list-feature.component.css',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
 export class UserListFeatureComponent {
   userListService = inject(ZeiterfassungUserListService);
@@ -43,5 +44,9 @@ export class UserListFeatureComponent {
         console.log('User hinzugefügt:', result);
       }
     });
+  }
+
+  public userDetails() {
+    console.log('Navigation zu UserDetails');
   }
 }

@@ -22,6 +22,9 @@
       "@zeiterfassung/user-list-data-access": [
         "libs/zeiterfassung/user-list-data-access/src/index.ts"
       ],
+      "@zeiterfassung/user-list-details": [
+        "libs/zeiterfassung/pages/user-list-details/src/index.ts"
+      ],
       "@zeiterfassung/user-list-feature": [
         "libs/zeiterfassung/user-list-feature/src/index.ts"
       ]

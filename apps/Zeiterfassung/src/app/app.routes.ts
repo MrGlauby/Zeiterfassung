@@ -9,9 +9,17 @@ export const appRoutes: Route[] = [
 
   {
     path: 'userlist',
-    loadComponent: () => import('@zeiterfassung/user-list-feature').then((m) => m.UserListFeatureComponent),
-  }
+    loadComponent: () =>
+      import('@zeiterfassung/user-list-feature').then(
+        (m) => m.UserListFeatureComponent
+      ),
+  },
 
-
-
+  {
+    path: 'user-list-details',
+    loadComponent: () =>
+      import('@zeiterfassung/user-list-details').then(
+        (m) => m.UserListDetailsComponent
+      ),
+  },
 ];

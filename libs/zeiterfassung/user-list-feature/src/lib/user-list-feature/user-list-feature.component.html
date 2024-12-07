@@ -4,26 +4,24 @@
   <div class="table-container">
     <button class="btf-details" (click)="createUser()">Create me!</button>
 
-    <div class="table-header-box">
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Lastname</th>
-            <th>Group</th>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Lastname</th>
+          <th>Group</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let user of userListService.getAll()">
+          <tr [routerLink]="'/user-list-details'" (click)="userDetails()">
+            <td>{{ user.name }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.group }}</td>
           </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let user of userListService.getAll()">
-            <tr>
-              <td>{{ user.name }}</td>
-              <td>{{ user.lastname }}</td>
-              <td>{{ user.group }}</td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+        </ng-container>
+      </tbody>
+    </table>
 
     <!-- <pre>{{ userListService.getAll() | json }}</pre> -->
   </div>
