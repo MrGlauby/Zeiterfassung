@@ -1,9 +1,8 @@
 export default {
-  displayName: 'user-list-details',
-  preset: '../../../../jest.preset.js',
+  displayName: 'user-detail-feature',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../../../coverage/libs/zeiterfassung/pages/user-list-details',
+  coverageDirectory: '../../../coverage/libs/zeiterfassung/user-detail-feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

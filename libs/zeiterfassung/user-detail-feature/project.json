@@ -1,7 +1,7 @@
 {
-  "name": "user-list-details",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/zeiterfassung/pages/user-list-details/src",
+  "name": "user-detail-feature",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/zeiterfassung/user-detail-feature/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/zeiterfassung/pages/user-list-details/jest.config.ts"
+        "jestConfig": "libs/zeiterfassung/user-detail-feature/jest.config.ts"
       }
     },
     "lint": {

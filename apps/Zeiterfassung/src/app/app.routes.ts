@@ -16,10 +16,10 @@ export const appRoutes: Route[] = [
   },
 
   {
-    path: 'user-list-details',
+    path: 'user-detail-feature/:id', // ID als Parameter hinzufügen
     loadComponent: () =>
-      import('@zeiterfassung/user-list-details').then(
-        (m) => m.UserListDetailsComponent
+      import('@zeiterfassung/user-detail-feature').then(
+        (m) => m.UserDetailFeatureComponent
       ),
   },
 ];

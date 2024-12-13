@@ -1,0 +1,27 @@
+<p>user-list-feature works!</p>
+
+<div class="wrapper">
+  <div class="table-container">
+    <button class="btf-details" (click)="addHours()">Add Hours</button>
+
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Lastname</th>
+          <th>Group</th>
+          <th>Hour</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="user">
+          <td>{{ user.name }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.group }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pre>{{ user | json }}</pre>
+  </div>
+</div>
