@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User, ZeiterfassungUserListService } from '@zeiterfassung/user-list-data-access';
+import {
+  User,
+  ZeiterfassungUserListService,
+} from '@zeiterfassung/user-list-data-access';
 import { Hour } from '@zeiterfassung/time-data-access';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -21,12 +24,13 @@ export class UserDetailFeatureComponent {
   private timeDataService = inject(TimeDataAccessService);
 
   formHour = new FormGroup({
-    from: new FormControl(''),
-    to: new FormControl(''),
-    description: new FormControl(''),
+    from: new FormControl<string>(''),
+    to: new FormControl<string>(''),
+    description: new FormControl<string>(''),
   });
 
   public user!: User;
+  public userHours: Hour[] = [];
 
   constructor() {
     const idParam: string | null = this.route.snapshot.paramMap.get('id');
@@ -38,56 +42,27 @@ export class UserDetailFeatureComponent {
         this.router.navigate(['/userlist']);
       } else {
         this.user = user;
+        this.userHours = this.timeDataService.getHours(userId);
       }
     } else {
       this.router.navigate(['/userlist']);
     }
   }
 
-  ////----> älterer CODE aber schon Reflektiert!
+  public addHours(): void {
 
-  // ich möchte um typbasiert zu arbeiten das id vom type number ist und auf das interface User
-
-  // class member user !
-  // parent scope vom Constructor scope!
-  //   public user!: User;
-
-  //   formHour = new FormGroup({
-  //     from: new FormControl(''),
-  //     to: new FormControl(''),
-  //     description: new FormControl(''),
-  //   });
-
-  //   constructor() {
-  //     const idParam: string | null = this.route.snapshot.paramMap.get('id');
-  //     if (typeof idParam === 'string') {
-  //       const userId: number = +idParam;
-  //       const user = this.userListService.getUser(userId);
-  //       if (!user) {
-  //         // navigate import mit router!
-  //         this.router.navigate(['/userlist'])
-  //         console.log('ne is nciht da!!!!!!!!!!!!!!!');
-  //       } else {
-  //         // ich kann von außen die Konstante user zuweisen und aus den constructor rausgeben (Das child kan infos an den Paretn rausgeben!)!
-  //         this.user = user;
-  //         console.log('ist da!');
-  //       }
-  //     } else {
-  //       this.router.navigate(['/userlist'])
-  //       console.log(idParam);
-  //     }
-  //   }
-
-  //   // SCOPES !!
-  //   // if typoef ist der parent SCOPE vom if USER!
-
-  //   UserDetailFeatureComponent {
-  //     constructor() {
-  //         if(typeof idParam === 'string') {
-  //             if(!user) {
-
-  //             }
-  //         }
-  //     }
-  // }
+    this.timeDataService.addHours(this.user.id, this.formHour.value as any);
+    this.formHour.reset();
+    console.log('Stunden und Beschreibung wurde hinzugefügt!');
+  }
 }
+
+//   UserDetailFeatureComponent {
+//     constructor() {
+//         if(typeof idParam === 'string') {
+//             if(!user) {
+
+//             }
+//         }
+//     }
+// }

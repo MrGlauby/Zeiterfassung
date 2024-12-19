@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  UserGroup,
+  UserCreate,
   ZeiterfassungUserListService,
 } from '@zeiterfassung/user-list-data-access';
 import { Dialog } from '@angular/cdk/dialog';
@@ -20,26 +20,19 @@ export class UserListFeatureComponent {
   changeDetectorRef = inject(ChangeDetectorRef);
   dialog = inject(Dialog);
 
-  public displayedColumns: string[] = ['name', 'group', 'lastname'];
-
   // hier kommt der cdkDilaog rein!
   public createUser(): void {
-    const dialogRef = this.dialog.open<{
-      name: string;
-      lastname: string;
-      group: UserGroup;
-    }>(ZeiterfassungUserCreateModalComponent, {
-      data: { message: 'Neuer Benutzer erstellen?' },
-    });
+    const dialogRef = this.dialog.open<UserCreate>(
+      ZeiterfassungUserCreateModalComponent,
+      {
+        data: { message: 'Neuer Benutzer erstellen?' },
+      }
+    );
 
     dialogRef.closed.subscribe((result) => {
       console.log(result);
       if (result) {
-        this.userListService.create({
-          name: result.name,
-          lastname: result.lastname,
-          group: result.group,
-        });
+        this.userListService.create(result);
         this.changeDetectorRef.detectChanges();
         console.log('User hinzugefügt:', result);
       }

@@ -12,6 +12,9 @@ export class ZeiterfassungUserListService {
     return newUser;
   }
 
+
+
+  
   // hier kommt noch ein get für einen user rein!
   // get einen user! retun oneUser! mit userID
 
@@ -26,4 +29,7 @@ export class ZeiterfassungUserListService {
   public getAll(): User[] {
     return this.#data;
   }
+
+
+
 }
