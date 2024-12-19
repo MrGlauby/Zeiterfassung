@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Hour } from './user.interface';
+import { Hour } from './time.interface';
 
-@Injectable({ providedIn: 'root' })
-export class ZeiterfassungHourService {
+@Injectable({
+  providedIn: 'root',
+})
+export class TimeDataAccessService {
   private userHours: { [userId: number]: Hour[] } = {};
 
   public addHours(userId: number, hour: Hour): void {

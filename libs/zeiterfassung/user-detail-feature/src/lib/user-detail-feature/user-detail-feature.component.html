@@ -2,8 +2,6 @@
 
 <div class="wrapper">
   <div class="table-container">
-    <button class="btf-details" (click)="addHours()">Add Hours</button>
-
     <table class="user-table">
       <thead>
         <tr>
@@ -18,10 +16,39 @@
           <td>{{ user.name }}</td>
           <td>{{ user.lastname }}</td>
           <td>{{ user.group }}</td>
+          <td>
+            <ul>
+              <!-- <li *ngFor="let hour of user.hours">
+                {{ hour.from }} - {{ hour.to }}: {{ hour.description }}
+              </li> -->
+            </ul>
+          </td>
         </tr>
       </tbody>
     </table>
 
-    <pre>{{ user | json }}</pre>
+    <div class="formGroupWrapper">
+      <form [formGroup]="formHour">
+        <label>
+          From:
+          <input type="text" formControlName="from" />
+        </label>
+        <label>
+          To:
+          <input type="text" formControlName="to" />
+        </label>
+        <label>
+          Description:
+          <input type="text" formControlName="description" />
+        </label>
+        <div class="btn-wrapper">
+          <!-- <button type="button" class="btn-details" (click)="addHours()">
+            Add Hours
+          </button> -->
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+
+<pre>{{ user | json }}</pre>

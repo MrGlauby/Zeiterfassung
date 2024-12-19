@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@zeiterfassung/time-data-access": [
+        "libs/zeiterfassung/time-data-access/src/index.ts"
+      ],
+      "@zeiterfassung/time-data-service": [
+        "libs/zeiterfassung/time-data-service/src/index.ts"
+      ],
       "@zeiterfassung/ui": ["libs/shared/ui/src/index.ts"],
       "@zeiterfassung/user-create-modal": [
         "libs/zeiterfassung/user-create-modal/src/index.ts"

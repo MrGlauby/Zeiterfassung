@@ -14,11 +14,15 @@ export class ZeiterfassungUserListService {
 
   // hier kommt noch ein get für einen user rein!
   // get einen user! retun oneUser! mit userID
+
+  // chekc das nochmals !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   public getUser(id: number): User | undefined {
     const oneUser = this.#data.find((user) => user.id === id);
     return oneUser;
   }
 
+
+  
   public getAll(): User[] {
     return this.#data;
   }

@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/Zeiterfassung",
         "index": "apps/Zeiterfassung/src/index.html",
         "browser": "apps/Zeiterfassung/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/Zeiterfassung/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,9 @@
             "input": "apps/Zeiterfassung/public"
           }
         ],
-        "styles": ["apps/Zeiterfassung/src/styles.scss"],
+        "styles": [
+          "apps/Zeiterfassung/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/Zeiterfassung/src/main.server.ts",
         "prerender": true,
@@ -44,7 +50,8 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "serviceWorker": "apps/Zeiterfassung/ngsw-config.json"
         },
         "development": {
           "optimization": false,
@@ -77,7 +84,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/Zeiterfassung/jest.config.ts"
       }
