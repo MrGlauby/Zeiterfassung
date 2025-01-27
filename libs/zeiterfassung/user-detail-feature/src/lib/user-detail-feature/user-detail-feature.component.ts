@@ -9,6 +9,7 @@ import { Hour } from '@zeiterfassung/time-data-access';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { TimeDataAccessService } from '@zeiterfassung/time-data-access';
+import { Observable, tap, pipe, of } from 'rxjs';
 
 @Component({
   selector: 'lib-user-detail-feature',
@@ -37,32 +38,31 @@ export class UserDetailFeatureComponent {
 
     if (typeof idParam === 'string') {
       const userId: number = +idParam;
-      const user = this.userListService.getUser(userId);
-      if (!user) {
-        this.router.navigate(['/userlist']);
-      } else {
-        this.user = user;
-        this.userHours = this.timeDataService.getHours(userId);
-      }
+      this.userListService.getUser(userId).subscribe((user) => {
+        if (!user) {
+          this.router.navigate(['/userlist']);
+        } else {
+          this.user = user;
+          this.userHours = this.timeDataService.getHours(userId);
+        }
+      });
     } else {
       this.router.navigate(['/userlist']);
     }
   }
 
+
   public addHours(): void {
-
-    this.timeDataService.addHours(this.user.id, this.formHour.value as any);
-    this.formHour.reset();
-    console.log('Stunden und Beschreibung wurde hinzugefügt!');
+    this.timeDataService.addHours(this.user.id, this.formHour.value as any)
+    .pipe(
+      tap(() => {
+        this.formHour.reset();
+        this.userHours = this.timeDataService.getHours(this.user.id);
+      })
+    )
+    .subscribe(() => {
+      console.log('Stunden und Beschreibung wurde hinzugefügt!');
+    });
   }
+
 }
-
-//   UserDetailFeatureComponent {
-//     constructor() {
-//         if(typeof idParam === 'string') {
-//             if(!user) {
-
-//             }
-//         }
-//     }
-// }

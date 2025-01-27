@@ -1,35 +1,31 @@
 import { Injectable } from '@angular/core';
 import { User, UserCreate } from './user.interface';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ZeiterfassungUserListService {
-  #data: User[] = [];
+
+
+  #data$$ = new BehaviorSubject<User[]>([]);
   #counter = 0;
 
-  public create(user: UserCreate): User {
-    const newUser = { ...user, id: this.#counter++, hours: [] };
-    this.#data.push(newUser);
-    return newUser;
+  public getAll(): Observable<User[]> {
+    return this.#data$$.asObservable();
+  }
+
+  public create(user: UserCreate) {
+    const newUser: User = { ...user, id: this.#counter++ };
+    this.#data$$.next([...this.#data$$.value, newUser]);
   }
 
 
 
-  
-  // hier kommt noch ein get für einen user rein!
-  // get einen user! retun oneUser! mit userID
-
-  // chekc das nochmals !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  public getUser(id: number): User | undefined {
-    const oneUser = this.#data.find((user) => user.id === id);
-    return oneUser;
+  public getUser(id: number): Observable<User | undefined> {
+    return this.#data$$.asObservable().pipe(map((users: User[]) => {
+        const user = users.find((user) => user.id === id);
+        return user;
+      })
+    );
   }
-
-
-  
-  public getAll(): User[] {
-    return this.#data;
-  }
-
-
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hour } from './time.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +8,18 @@ import { Hour } from './time.interface';
 export class TimeDataAccessService {
   private userHours: { [userId: number]: Hour[] } = {};
 
-  public addHours(userId: number, hour: Hour): void {
+  public addHours(userId: number, hour: Hour): Observable<Hour> {
     if (!this.userHours[userId]) {
       this.userHours[userId] = [];
     }
     this.userHours[userId].push(hour);
+      return of(hour);
   }
 
   public getHours(userId: number): Hour[] {
     return this.userHours[userId] || [];
   }
 }
+
+
+
