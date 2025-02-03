@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   User,
@@ -17,6 +17,7 @@ import { Observable, tap, pipe, of } from 'rxjs';
   templateUrl: './user-detail-feature.component.html',
   styleUrl: './user-detail-feature.component.css',
   imports: [CommonModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailFeatureComponent {
   private userListService = inject(ZeiterfassungUserListService);
@@ -43,7 +44,9 @@ export class UserDetailFeatureComponent {
           this.router.navigate(['/userlist']);
         } else {
           this.user = user;
-          this.userHours = this.timeDataService.getHours(userId);
+          this.timeDataService.getHours(userId).subscribe((hours) => {
+            this.userHours = hours;
+          });
         }
       });
     } else {
@@ -51,18 +54,19 @@ export class UserDetailFeatureComponent {
     }
   }
 
-
-  public addHours(): void {
-    this.timeDataService.addHours(this.user.id, this.formHour.value as any)
-    .pipe(
-      tap(() => {
-        this.formHour.reset();
-        this.userHours = this.timeDataService.getHours(this.user.id);
-      })
-    )
-    .subscribe(() => {
-      console.log('Stunden und Beschreibung wurde hinzugefügt!');
-    });
-  }
-
+  // public addHours(): void {
+  //   this.timeDataService
+  //     .addHours(this.user.id, this.formHour.value as any)
+  //     .pipe(
+  //       tap(() => {
+  //         this.formHour.reset();
+  //         this.timeDataService.getHours(this.user.id).subscribe((hours) => {
+  //           this.userHours = hours;
+  //         });
+  //       })
+  //     )
+  //     .subscribe(() => {
+  //       console.log('Stunden und Beschreibung wurde hinzugefügt!');
+  //     });
+  // }
 }

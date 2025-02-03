@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
@@ -10,6 +10,7 @@ import { UserGroup } from '@zeiterfassung/user-list-data-access';
   templateUrl: './user-create-modal.component.html',
   styleUrl: './user-create-modal.component.css',
   imports: [CommonModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZeiterfassungUserCreateModalComponent {
   dialogRef = inject(DialogRef);
