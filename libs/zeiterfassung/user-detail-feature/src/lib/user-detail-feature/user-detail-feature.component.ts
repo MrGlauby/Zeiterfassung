@@ -54,19 +54,19 @@ export class UserDetailFeatureComponent {
     }
   }
 
-  // public addHours(): void {
-  //   this.timeDataService
-  //     .addHours(this.user.id, this.formHour.value as any)
-  //     .pipe(
-  //       tap(() => {
-  //         this.formHour.reset();
-  //         this.timeDataService.getHours(this.user.id).subscribe((hours) => {
-  //           this.userHours = hours;
-  //         });
-  //       })
-  //     )
-  //     .subscribe(() => {
-  //       console.log('Stunden und Beschreibung wurde hinzugefügt!');
-  //     });
-  // }
+  public addHours(): void {
+    this.timeDataService
+      .addHours(this.user.id, this.formHour.value as any)
+      .pipe(
+        tap(() => {
+          this.formHour.reset();
+          this.timeDataService.getHours(this.user.id).subscribe((hours) => {
+            this.userHours = hours;
+          });
+        })
+      )
+      .subscribe(() => {
+        console.log('Stunden und Beschreibung wurde hinzugefügt!');
+      });
+  }
 }
