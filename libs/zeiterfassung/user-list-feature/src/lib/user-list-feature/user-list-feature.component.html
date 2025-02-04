@@ -2,7 +2,7 @@
 
 <div class="wrapper">
   <div class="table-container">
-    <button class="btf-details" (click)="createUser()">Create me!</button>
+    <!-- <button class="btf-details" (click)="createUser()">Create me!</button> -->
 
     <table class="user-table">
       <thead>
@@ -13,10 +13,9 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let user of userListService.getAll()">
+        <ng-container *ngFor="let user of userListService.getAll() | async">
           <tr
             [routerLink]="['/user-detail-feature', user.id]"
-            (click)="userDetails()"
           >
             <td>{{ user.name }}</td>
             <td>{{ user.lastname }}</td>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   User,
@@ -9,6 +9,7 @@ import { Hour } from '@zeiterfassung/time-data-access';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { TimeDataAccessService } from '@zeiterfassung/time-data-access';
+import { Observable, tap, pipe, of } from 'rxjs';
 
 @Component({
   selector: 'lib-user-detail-feature',
@@ -16,6 +17,7 @@ import { TimeDataAccessService } from '@zeiterfassung/time-data-access';
   templateUrl: './user-detail-feature.component.html',
   styleUrl: './user-detail-feature.component.css',
   imports: [CommonModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailFeatureComponent {
   private userListService = inject(ZeiterfassungUserListService);
@@ -37,32 +39,34 @@ export class UserDetailFeatureComponent {
 
     if (typeof idParam === 'string') {
       const userId: number = +idParam;
-      const user = this.userListService.getUser(userId);
-      if (!user) {
-        this.router.navigate(['/userlist']);
-      } else {
-        this.user = user;
-        this.userHours = this.timeDataService.getHours(userId);
-      }
+      this.userListService.getUser(userId).subscribe((user) => {
+        if (!user) {
+          this.router.navigate(['/userlist']);
+        } else {
+          this.user = user;
+          this.timeDataService.getHours(userId).subscribe((hours) => {
+            this.userHours = hours;
+          });
+        }
+      });
     } else {
       this.router.navigate(['/userlist']);
     }
   }
 
   public addHours(): void {
-
-    this.timeDataService.addHours(this.user.id, this.formHour.value as any);
-    this.formHour.reset();
-    console.log('Stunden und Beschreibung wurde hinzugefügt!');
+    this.timeDataService
+      .addHours(this.user.id, this.formHour.value as any)
+      .pipe(
+        tap(() => {
+          this.formHour.reset();
+          this.timeDataService.getHours(this.user.id).subscribe((hours) => {
+            this.userHours = hours;
+          });
+        })
+      )
+      .subscribe(() => {
+        console.log('Stunden und Beschreibung wurde hinzugefügt!');
+      });
   }
 }
-
-//   UserDetailFeatureComponent {
-//     constructor() {
-//         if(typeof idParam === 'string') {
-//             if(!user) {
-
-//             }
-//         }
-//     }
-// }
